@@ -65,8 +65,15 @@ class MainActivity : AppCompatActivity() {
             .setTitle(resources.getString(R.string.create_download))
             .setView(view)
             .setPositiveButton(resources.getString(R.string.download)) { _, _ ->
-                // Create the download
+
+                // Validate the URL
                 val url = view.input_url.text.toString()
+                if (!Utils.isValidURL(url)) {
+                    showSnackbar(R.string.invalid_url)
+                    return@setPositiveButton
+                }
+
+                // The URL is valid now, start the download
                 downloadManager.createDownloadFunction(
                     url,
                     success = {
