@@ -66,11 +66,6 @@ class MainActivity : AppCompatActivity() {
         downloadManager.removeListener(fetchListener)
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        downloadManager.release()
-    }
-
     private fun checkStoragePermissions() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             requestPermissions(
