@@ -4,6 +4,8 @@ import android.content.Context
 import android.net.Uri
 import android.os.Environment
 import com.tonyodev.fetch2.*
+import com.tonyodev.fetch2core.Downloader
+import com.tonyodev.fetch2okhttp.OkHttpDownloader
 
 /**
  * Created by DoNguyen on 14/9/20.
@@ -15,6 +17,8 @@ class DownloadManager(context: Context) {
     init {
         val fetchConfiguration = FetchConfiguration.Builder(context.applicationContext)
             .setDownloadConcurrentLimit(3)
+            .enableRetryOnNetworkGain(true)
+            .setHttpDownloader(OkHttpDownloader(Downloader.FileDownloaderType.PARALLEL))
             .setNotificationManager(object : DefaultFetchNotificationManager(context) {
                 override fun getFetchInstanceForNamespace(namespace: String): Fetch {
                     return fetch
