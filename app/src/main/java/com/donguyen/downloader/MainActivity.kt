@@ -104,13 +104,13 @@ class MainActivity : AppCompatActivity() {
     private fun showCreateDownloadDialog() {
         val view = layoutInflater.inflate(R.layout.layout_create_download_dialog, null)
         MaterialAlertDialogBuilder(this)
-            .setTitle(resources.getString(R.string.create_download))
+            .setTitle(R.string.create_download)
             .setView(view)
-            .setPositiveButton(resources.getString(R.string.download)) { _, _ ->
+            .setPositiveButton(R.string.download) { _, _ ->
                 val url = view.input_url.text.toString()
                 createDownload(url)
             }
-            .setNeutralButton(resources.getString(R.string.cancel)) { _, _ ->
+            .setNeutralButton(R.string.cancel) { _, _ ->
                 // No need to do anything.
             }
             .show()
