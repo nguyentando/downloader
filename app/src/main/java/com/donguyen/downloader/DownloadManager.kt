@@ -1,7 +1,6 @@
 package com.donguyen.downloader
 
 import android.content.Context
-import android.net.Uri
 import android.os.Environment
 import com.tonyodev.fetch2.*
 import com.tonyodev.fetch2core.Downloader
@@ -29,13 +28,15 @@ class DownloadManager(context: Context) {
         fetch = Fetch.getInstance(fetchConfiguration)
     }
 
-    fun createDownloadFunction(
+    fun createDownloadRequest(
         url: String,
         success: ((Request?) -> Unit)? = null,
         fail: ((Error?) -> Unit)? = null
     ) {
         val filePath = getFilePath(url)
-        val downloadRequest = Request(url, filePath)
+        val downloadRequest = Request(url, filePath).apply {
+            priority = Priority.HIGH
+        }
 
         fetch.enqueue(downloadRequest,
             { request: Request? ->
@@ -46,13 +47,48 @@ class DownloadManager(context: Context) {
             })
     }
 
+    fun getAllDownloads(callback: (List<Download>) -> Unit) {
+        fetch.getDownloads(callback)
+    }
+
+    fun getDownloadsByRequestId(requestId: Long, callback: (List<Download>) -> Unit) {
+        fetch.getDownloadsByRequestIdentifier(requestId, callback)
+    }
+
+    fun pause(id: Int) {
+        fetch.pause(id)
+    }
+
+    fun resume(id: Int) {
+        fetch.resume(id)
+    }
+
+    fun remove(id: Int) {
+        fetch.remove(id)
+    }
+
+    fun retry(id: Int) {
+        fetch.retry(id)
+    }
+
+    fun addListener(listener: FetchListener) {
+        fetch.addListener(listener)
+    }
+
+    fun removeListener(listener: FetchListener) {
+        fetch.removeListener(listener)
+    }
+
+    fun release() {
+        fetch.close()
+    }
+
     private fun getFilePath(url: String): String {
         val directory =
             Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
                 .toString() + "/Downloader"
 
-        val uri = Uri.parse(url)
-        val fileName = uri.lastPathSegment
+        val fileName = Utils.getFileName(url)
 
         return "$directory/$fileName"
     }
