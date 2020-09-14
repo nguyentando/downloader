@@ -1,11 +1,43 @@
 <resources>
     <string name="app_name">Downloader</string>
-    <string name="create_download">Create Download</string>
+
+    <string name="input_url">Input URL</string>
     <string name="download">Download</string>
     <string name="cancel">Cancel</string>
-    <string name="input_url">Input URL</string>
-    <string name="permission_not_enabled">Please enable the Write External Storage Permission</string>
+
+    <string name="create_download">Create Download</string>
     <string name="create_download_success">Create Download Success</string>
     <string name="create_download_fail">Create Download Fail</string>
+
+    <string name="permission_not_enabled">Please enable the Write External Storage Permission</string>
+
     <string name="invalid_url">Invalid URL!</string>
+    <string name="retry">Retry</string>
+    <string name="pause">Pause</string>
+    <string name="progress_percent_format">%1$d%%</string>
+
+    <!-- download speed -->
+    <string name="download_speed_bytes">%1$d B/s</string>
+    <string name="download_speed_kb">%1$s KB/s</string>
+    <string name="download_speed_mb">%1$s MB/s</string>
+
+    <!-- download eta -->
+    <string name="download_eta_sec">%1$ds left</string>
+    <string name="download_eta_min">%1$dm %2$ds left</string>
+    <string name="download_eta_hrs">%1$dh %2$dm %3$ds left</string>
+
+    <!-- status -->
+    <string name="done">Done</string>
+    <string name="downloading">Downloading…</string>
+    <string name="failed">Error</string>
+    <string name="paused">Paused</string>
+    <string name="queued">Queueing</string>
+    <string name="removed">Removed</string>
+    <string name="none">Not Queued</string>
+    <string name="unknown">Unknown</string>
+    <string name="resume">Resume</string>
+    <string name="view">View</string>
+
+    <string name="delete_title">Are you sure you want to delete %1$s?</string>
+    <string name="delete">Delete</string>
 </resources>
