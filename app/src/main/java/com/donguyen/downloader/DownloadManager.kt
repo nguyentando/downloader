@@ -3,7 +3,6 @@ package com.donguyen.downloader
 import android.content.Context
 import android.net.Uri
 import android.os.Environment
-import android.util.Log
 import com.tonyodev.fetch2.*
 
 /**
@@ -26,19 +25,20 @@ class DownloadManager(context: Context) {
         fetch = Fetch.getInstance(fetchConfiguration)
     }
 
-    fun createDownloadFunction(url: String) {
+    fun createDownloadFunction(
+        url: String,
+        success: ((Request?) -> Unit)? = null,
+        fail: ((Error?) -> Unit)? = null
+    ) {
         val filePath = getFilePath(url)
-        val request = Request(url, filePath)
+        val downloadRequest = Request(url, filePath)
 
-        fetch.enqueue(request,
-            { updatedRequest: Request? ->
-                run {
-                    Log.d("DownloadManager", "success")
-                }
-            }, { error: Error? ->
-                run {
-                    Log.d("DownloadManager", error?.name.toString())
-                }
+        fetch.enqueue(downloadRequest,
+            { request: Request? ->
+                success?.invoke(request)
+            },
+            { error: Error? ->
+                fail?.invoke(error)
             })
     }
 

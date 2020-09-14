@@ -5,4 +5,6 @@
     <string name="cancel">Cancel</string>
     <string name="input_url">Input URL</string>
     <string name="permission_not_enabled">Please enable the Write External Storage Permission</string>
+    <string name="create_download_success">Create Download Success</string>
+    <string name="create_download_fail">Create Download Fail</string>
 </resources>

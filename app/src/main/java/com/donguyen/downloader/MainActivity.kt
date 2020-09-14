@@ -4,6 +4,8 @@ import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
+import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
@@ -12,6 +14,8 @@ import kotlinx.android.synthetic.main.layout_create_download_dialog.view.*
 
 
 class MainActivity : AppCompatActivity() {
+
+    private val TAG = MainActivity::class.simpleName
 
     private val STORAGE_PERMISSION_CODE = 200
 
@@ -51,8 +55,7 @@ class MainActivity : AppCompatActivity() {
         ) {
             showCreateDownloadDialog()
         } else {
-            Snackbar.make(main_layout, R.string.permission_not_enabled, Snackbar.LENGTH_LONG)
-                .show()
+            showSnackbar(R.string.permission_not_enabled)
         }
     }
 
@@ -61,15 +64,28 @@ class MainActivity : AppCompatActivity() {
         MaterialAlertDialogBuilder(this)
             .setTitle(resources.getString(R.string.create_download))
             .setView(view)
-            .setNeutralButton(resources.getString(R.string.cancel)) { _, _ ->
-                // No need to do anything.
-            }
             .setPositiveButton(resources.getString(R.string.download)) { _, _ ->
                 // Create the download
                 val url = view.input_url.text.toString()
-                downloadManager.createDownloadFunction(url)
+                downloadManager.createDownloadFunction(
+                    url,
+                    success = {
+                        Log.d(TAG, "Create download success, request = $it")
+                        showSnackbar(R.string.create_download_success)
+                    },
+                    fail = {
+                        Log.d(TAG, "Create download fail, error = $it")
+                        showSnackbar(R.string.create_download_fail)
+                    })
+            }
+            .setNeutralButton(resources.getString(R.string.cancel)) { _, _ ->
+                // No need to do anything.
             }
             .show()
+    }
+
+    private fun showSnackbar(@StringRes resId: Int) {
+        Snackbar.make(main_layout, resId, Snackbar.LENGTH_LONG).show()
     }
 
 }
