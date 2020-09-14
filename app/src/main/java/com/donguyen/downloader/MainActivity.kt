@@ -1,11 +1,14 @@
 package com.donguyen.downloader
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.FileProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
@@ -15,11 +18,10 @@ import com.tonyodev.fetch2.Error
 import com.tonyodev.fetch2.FetchListener
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.layout_create_download_dialog.view.*
+import java.io.File
 
 
 class MainActivity : AppCompatActivity() {
-
-    private val TAG = MainActivity::class.simpleName
 
     companion object {
         private const val STORAGE_PERMISSION_CODE = 200
@@ -33,16 +35,19 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        // init download manager
         downloadManager = DownloadManager(this)
 
-        create_download_fab.setOnClickListener {
-            checkStoragePermissions()
-        }
-
+        // init download list
         downloadAdapter = DownloadAdapter(actionListener)
         download_list.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = downloadAdapter
+        }
+
+        // init create download FAB
+        create_download_fab.setOnClickListener {
+            checkStoragePermissions()
         }
     }
 
@@ -87,6 +92,7 @@ class MainActivity : AppCompatActivity() {
             && grantResults.isNotEmpty()
             && grantResults[0] == PackageManager.PERMISSION_GRANTED
         ) {
+            // permission granted
             showCreateDownloadDialog()
         } else {
             showSnackbar(R.string.permission_not_enabled)
@@ -181,7 +187,7 @@ class MainActivity : AppCompatActivity() {
     private val actionListener = object : ActionListener {
 
         override fun onView(download: Download) {
-            // TODO - view a file
+            view(download)
         }
 
         override fun onPause(id: Int) {
@@ -201,4 +207,25 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun view(download: Download) {
+        val intent = Intent().apply {
+
+            action = Intent.ACTION_VIEW
+            flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
+
+            val file = File(download.file)
+            val uri = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                FileProvider.getUriForFile(
+                    this@MainActivity,
+                    this@MainActivity.applicationContext.packageName.toString() + ".provider",
+                    file
+                )
+            } else {
+                Uri.fromFile(file)
+            }
+            setDataAndType(uri, Utils.getMimeType(this@MainActivity, uri))
+        }
+        this@MainActivity.startActivity(intent)
+    }
 }

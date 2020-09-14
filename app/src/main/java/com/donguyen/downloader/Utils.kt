@@ -1,11 +1,13 @@
 package com.donguyen.downloader
 
+import android.content.ContentResolver
 import android.content.Context
 import android.net.Uri
 import android.util.Patterns
 import android.webkit.MimeTypeMap
 import com.tonyodev.fetch2.Status
 import java.text.DecimalFormat
+
 
 /**
  * Created by DoNguyen on 14/9/20.
@@ -82,12 +84,14 @@ object Utils {
         }
     }
 
-    fun getMimeType(context: Context, uri: Uri): String {
-        val mime = MimeTypeMap.getSingleton()
-        var type = mime.getExtensionFromMimeType(context.contentResolver.getType(uri))
-        if (type == null) {
-            type = "*/*"
+    fun getMimeType(context: Context, uri: Uri): String? {
+        return if (uri.scheme.equals(ContentResolver.SCHEME_CONTENT)) {
+            context.applicationContext.contentResolver.getType(uri)
+        } else {
+            val fileExtension = MimeTypeMap.getFileExtensionFromUrl(uri.toString())
+            MimeTypeMap.getSingleton().getMimeTypeFromExtension(
+                fileExtension.toLowerCase()
+            )
         }
-        return type
     }
 }
