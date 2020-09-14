@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">Downloader</string>
     <string name="create_download">Create Download</string>
+    <string name="download">Download</string>
+    <string name="cancel">Cancel</string>
+    <string name="input_url">Input URL</string>
+    <string name="permission_not_enabled">Please enable the Write External Storage Permission</string>
 </resources>
