@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity() {
         ) {
             showCreateDownloadDialog()
         } else {
-            Snackbar.make(main_layout, R.string.permission_not_enabled, Snackbar.LENGTH_INDEFINITE)
+            Snackbar.make(main_layout, R.string.permission_not_enabled, Snackbar.LENGTH_LONG)
                 .show()
         }
     }
