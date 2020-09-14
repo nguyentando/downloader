@@ -120,6 +120,7 @@ class MainActivity : AppCompatActivity() {
             url,
             success = {
                 showSnackbar(R.string.create_download_success)
+                download_list.smoothScrollToPosition(0)
             },
             fail = {
                 showSnackbar(R.string.create_download_fail)
