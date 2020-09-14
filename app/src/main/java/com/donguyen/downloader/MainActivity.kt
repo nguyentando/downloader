@@ -55,7 +55,14 @@ class MainActivity : AppCompatActivity() {
         super.onStart()
         downloadManager.addListener(fetchListener)
         downloadManager.getAllDownloads { downloads ->
-            downloads.forEach {
+            val mutableList = mutableListOf<Download>().apply {
+                addAll(downloads)
+            }
+            mutableList.sortWith { first: Download, second: Download ->
+                // newest on the top
+                first.created.compareTo(second.created)
+            }
+            mutableList.forEach {
                 downloadAdapter.addOrUpdateDownload(it)
             }
         }
