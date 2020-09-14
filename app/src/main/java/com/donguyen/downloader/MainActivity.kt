@@ -228,6 +228,10 @@ class MainActivity : AppCompatActivity() {
             }
             setDataAndType(uri, Utils.getMimeType(this@MainActivity, uri))
         }
-        this@MainActivity.startActivity(intent)
+        if (Utils.isIntentAvailable(this, intent)) {
+            startActivity(intent)
+        } else {
+            showSnackbar(R.string.intent_not_available)
+        }
     }
 }

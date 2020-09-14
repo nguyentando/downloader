@@ -2,6 +2,8 @@ package com.donguyen.downloader
 
 import android.content.ContentResolver
 import android.content.Context
+import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
 import android.util.Patterns
 import android.webkit.MimeTypeMap
@@ -93,5 +95,11 @@ object Utils {
                 fileExtension.toLowerCase()
             )
         }
+    }
+
+    fun isIntentAvailable(context: Context, intent: Intent): Boolean {
+        val resolveInfo =
+            context.packageManager.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY)
+        return resolveInfo.isNotEmpty()
     }
 }

@@ -40,4 +40,6 @@
 
     <string name="delete_title">Are you sure you want to delete %1$s?</string>
     <string name="delete">Delete</string>
+
+    <string name="intent_not_available">There\'s no app which can open this file</string>
 </resources>
