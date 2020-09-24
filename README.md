@@ -10,6 +10,7 @@ An application to let you download files from the internet.
 - [x] Show progress on a notification and handle interactions with the download (pause, resume, stop,...). 
 - [x] Show download speed.
 - [x] Show remaining time estimation.
+- [x] Delete a download request by long press on the download item in the list.
 - [ ] Allow user to select download destination (instead of the default Download folder).
 
 # Robustness:
