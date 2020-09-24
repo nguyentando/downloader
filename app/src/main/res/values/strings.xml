@@ -7,7 +7,7 @@
 
     <string name="create_download">Create Download</string>
     <string name="create_download_success">Create Download Success</string>
-    <string name="create_download_fail">Create Download Fail</string>
+    <string name="create_download_fail">Create Download Fail.\nReason: %1$s</string>
 
     <string name="permission_not_enabled">Please enable the Write External Storage Permission</string>
 

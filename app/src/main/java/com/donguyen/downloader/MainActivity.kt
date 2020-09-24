@@ -131,12 +131,16 @@ class MainActivity : AppCompatActivity() {
                 download_list.smoothScrollToPosition(0)
             },
             fail = {
-                showSnackbar(R.string.create_download_fail)
+                showSnackbar(getString(R.string.create_download_fail, it?.name))
             })
     }
 
     private fun showSnackbar(@StringRes resId: Int) {
         Snackbar.make(main_layout, resId, Snackbar.LENGTH_LONG).show()
+    }
+
+    private fun showSnackbar(message: String) {
+        Snackbar.make(main_layout, message, Snackbar.LENGTH_LONG).show()
     }
 
     private val fetchListener: FetchListener = object : AbstractFetchListener() {
