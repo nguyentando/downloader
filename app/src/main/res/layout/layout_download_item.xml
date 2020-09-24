@@ -6,7 +6,7 @@
     android:layout_height="wrap_content">
 
     <TextView
-        android:id="@+id/titleTextView"
+        android:id="@+id/download_title"
         style="@style/TextAppearance.MaterialComponents.Headline6"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -16,7 +16,7 @@
         tools:text="Title" />
 
     <ProgressBar
-        android:id="@+id/progressBar"
+        android:id="@+id/download_progress"
         style="@android:style/Widget.ProgressBar.Horizontal"
         android:layout_width="0dp"
         android:layout_height="5dp"
@@ -24,60 +24,60 @@
         android:max="100"
         android:progress="40"
         android:progressDrawable="@drawable/progress_bar"
-        app:layout_constraintBottom_toBottomOf="@+id/actionButton"
-        app:layout_constraintEnd_toStartOf="@+id/actionButton"
-        app:layout_constraintStart_toStartOf="@id/titleTextView"
-        app:layout_constraintTop_toTopOf="@+id/actionButton" />
+        app:layout_constraintBottom_toBottomOf="@+id/action_button"
+        app:layout_constraintEnd_toStartOf="@+id/action_button"
+        app:layout_constraintStart_toStartOf="@id/download_title"
+        app:layout_constraintTop_toTopOf="@+id/action_button" />
 
     <Button
-        android:id="@+id/actionButton"
+        android:id="@+id/action_button"
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="@dimen/button_width_large"
         android:layout_height="wrap_content"
         android:text="@string/pause"
         android:textColor="@color/colorAccent"
-        app:layout_constraintEnd_toEndOf="@id/titleTextView"
-        app:layout_constraintTop_toBottomOf="@+id/titleTextView" />
+        app:layout_constraintEnd_toEndOf="@id/download_title"
+        app:layout_constraintTop_toBottomOf="@+id/download_title" />
 
     <TextView
-        android:id="@+id/progress_TextView"
+        android:id="@+id/download_progress_text"
         style="@style/TextAppearance.MaterialComponents.Body2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/activity_margin_small"
-        app:layout_constraintStart_toStartOf="@+id/progressBar"
-        app:layout_constraintTop_toBottomOf="@+id/progressBar"
+        app:layout_constraintStart_toStartOf="@+id/download_progress"
+        app:layout_constraintTop_toBottomOf="@+id/download_progress"
         tools:text="40%" />
 
     <TextView
-        android:id="@+id/downloadSpeedTextView"
+        android:id="@+id/download_speed"
         style="@style/TextAppearance.MaterialComponents.Body2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="@+id/progressBar"
-        app:layout_constraintTop_toBottomOf="@+id/progressBar"
-        app:layout_constraintTop_toTopOf="@id/progress_TextView"
+        app:layout_constraintEnd_toEndOf="@+id/download_progress"
+        app:layout_constraintTop_toBottomOf="@+id/download_progress"
+        app:layout_constraintTop_toTopOf="@id/download_progress_text"
         tools:text="2.5 MB/s" />
 
     <TextView
-        android:id="@+id/remaining_TextView"
+        android:id="@+id/remaining_time"
         style="@style/TextAppearance.MaterialComponents.Body2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/activity_margin_small"
-        app:layout_constraintStart_toStartOf="@id/progress_TextView"
-        app:layout_constraintTop_toBottomOf="@+id/progress_TextView"
+        app:layout_constraintStart_toStartOf="@id/download_progress_text"
+        app:layout_constraintTop_toBottomOf="@+id/download_progress_text"
         tools:text="2m 15s left" />
 
     <TextView
-        android:id="@+id/status_TextView"
+        android:id="@+id/download_status"
         style="@style/TextAppearance.MaterialComponents.Body2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textStyle="italic"
-        app:layout_constraintEnd_toEndOf="@id/actionButton"
-        app:layout_constraintStart_toStartOf="@id/actionButton"
-        app:layout_constraintTop_toTopOf="@+id/remaining_TextView"
+        app:layout_constraintEnd_toEndOf="@id/action_button"
+        app:layout_constraintStart_toStartOf="@id/action_button"
+        app:layout_constraintTop_toTopOf="@+id/remaining_time"
         tools:text="Downloading" />
 
     <View
@@ -88,6 +88,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/remaining_TextView" />
+        app:layout_constraintTop_toBottomOf="@id/remaining_time" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

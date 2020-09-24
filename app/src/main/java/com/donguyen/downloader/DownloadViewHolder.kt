@@ -16,22 +16,24 @@ class DownloadViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val context = itemView.context
 
         // title
-        itemView.titleTextView.text = download.file
+        itemView.download_title.text = download.file
 
         // progress
         var progress: Int = download.progress
         if (progress == -1) { // progress not determined yet
             progress = 0
         }
-        itemView.progressBar.progress = progress
-        itemView.progress_TextView.text =
-            context.getString(R.string.progress_percent_format, progress)
+        itemView.download_progress.progress = progress
+        itemView.download_progress_text.text = context.getString(
+            R.string.progress_percent_format,
+            progress
+        )
 
         // download speed
         if (download.downloadedBytesPerSecond == 0L) {
-            itemView.downloadSpeedTextView.text = ""
+            itemView.download_speed.text = ""
         } else {
-            itemView.downloadSpeedTextView.text = Utils.getDownloadSpeedString(
+            itemView.download_speed.text = Utils.getDownloadSpeedString(
                 context,
                 download.downloadedBytesPerSecond
             )
@@ -39,17 +41,19 @@ class DownloadViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         // remaining time
         if (download.etaInMilliSeconds == -1L) {
-            itemView.remaining_TextView.text = ""
+            itemView.remaining_time.text = ""
         } else {
-            itemView.remaining_TextView.text =
-                Utils.getETAString(context, download.etaInMilliSeconds)
+            itemView.remaining_time.text = Utils.getETAString(
+                context,
+                download.etaInMilliSeconds
+            )
         }
 
         // status
-        itemView.status_TextView.setText(Utils.getStatusString(download.status))
+        itemView.download_status.setText(Utils.getStatusString(download.status))
 
         // action
-        val actionButton = itemView.actionButton
+        val actionButton = itemView.action_button
         actionButton.setOnClickListener(null)
         actionButton.isEnabled = true
 
