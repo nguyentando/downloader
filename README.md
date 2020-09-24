@@ -18,7 +18,7 @@ An application to let you download files from the internet.
 - [x] Automatically resume downloads when the phone has just rebooted and the app is just opened.
 - [x] Handle edge cases: invalid URL, file size is unknown, server doesn't support HTTP range requests,…
 - [x] Support redirects: if the URL is not a direct link but requires redirection, the app should be able to handle that.
-- [ ] NEED TESTING: Handle super edge case, for example: user starts a download > user pauses the download > user disabled external storage permission > user resumes the download > the app automatically resume the download in the background and try to write into external storage > exception because don’t have permission.
+- [x] Handle super edge case, for example: user starts a download > user pauses the download > user disabled external storage permission > user resumes the download > the app automatically resume the download in the background and try to write into external storage > exception because don’t have permission.
 - [ ] NEED TESTING: Handle different battery saving modes (Doze Mode, App Standby, Loosing Wake Lock,…).
 - [ ] NEED TESTING: Handle the case where the file on server has changed while the app is downloading the file (based on "Last Modified”).
 
